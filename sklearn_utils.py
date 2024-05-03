@@ -186,17 +186,20 @@ def sample_size_impact(docs, y, model_type):
         print(f'Training sample size: {(10 - size*10) / 10}')
         # separate into train and test
         x_train, x_test, y_train, y_test = train_test_split(docs, y,  test_size=size, random_state=0)
-        
         # calculate auc
         curve_data = classify_data(x_train, y_train, x_test, y_test, model_type)
         performance.append(curve_data["auc"]["score"])
 
     plt.figure().set_figwidth(5)
+    
     plt.grid(True)
     plt.axis((1, 0, 0.8, 1))
+    
     plt.plot(train_size, performance, color='blue', lw=2, label='Model Performance')
+    
     plt.title(f"Impact of Sample Size on {MODEL_MAP[model_type]['name']} Classifier Performance")
+    
     plt.xlabel('Testing Sample Percentage')
     plt.ylabel('AUC')
-    plt.legend()
+
     plt.show()
