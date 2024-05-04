@@ -18,7 +18,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn import svm
 
 
-MODEL_MAP = {
+CLASSIFIER_MAP = {
     "nb": {
             "name": "Naive Bayes",
             "model": MultinomialNB,
@@ -30,6 +30,8 @@ MODEL_MAP = {
             "hyper_param": "C"
         }
     }
+
+# region CLASSIFIERS
 
 def show_plots(curve_data, model_name, lw=2):
     
@@ -64,6 +66,8 @@ def show_plots(curve_data, model_name, lw=2):
 
 def predictions(model_type, model, x_test):
     
+    test_predictions = pred_probability = []
+    
     if model_type == "nb":
         # get classification probs and choose "1" class
         pred_probability = model.predict_proba(x_test)[:,1]
@@ -91,7 +95,7 @@ def fit_model(x_train, y_train,
                 ):
     
     # choose classification model and add hyperparams
-    model_params = MODEL_MAP[model_type]
+    model_params = CLASSIFIER_MAP[model_type]
     model = model_params["model"](**{ model_params["hyper_param"]: algorithm_para })
     
     # fit classifier model with training data
@@ -143,8 +147,8 @@ def classify_data(x_train, y_train, x_test, y_test, model_type, algorithm_para=1
 
 def search_params(x_train, y_train, clf, vectorizer=TfidfVectorizer()):
     
-    classifier = MODEL_MAP[clf]["model"]()
-    hyperparam = f'clf__{MODEL_MAP[clf]["hyper_param"]}'
+    classifier = CLASSIFIER_MAP[clf]["model"]()
+    hyperparam = f'clf__{CLASSIFIER_MAP[clf]["hyper_param"]}'
     
     metric = 'f1_macro'
     # initialize search params
@@ -197,9 +201,11 @@ def sample_size_impact(docs, y, model_type):
     
     plt.plot(train_size, performance, color='blue', lw=2, label='Model Performance')
     
-    plt.title(f"Impact of Sample Size on {MODEL_MAP[model_type]['name']} Classifier Performance")
+    plt.title(f"Impact of Sample Size on {CLASSIFIER_MAP[model_type]['name']} Classifier Performance")
     
     plt.xlabel('Testing Sample Percentage')
     plt.ylabel('AUC')
 
     plt.show()
+
+# endregion
