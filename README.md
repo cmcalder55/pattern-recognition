@@ -1,4 +1,4 @@
-# Classification
+# Pattern Recognition
 ### [Music Recommendation Model](./music-recommender/)
 ### [Gaussian Mixture Model](./gmm_density.ipynb)
 ### [Text Clustering](./text_clustering.ipynb)
