@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
 import numpy
+import os
 
-dataDir='/YOUR_DIRECTORY/Project/data_in_matrixForm/'
-file_name_test=dataDir + 'testTrack_hierarchy.txt'
-file_name_train=dataDir + 'trainIdx2_matrix.txt'
-output_file= dataDir + 'output1.txt'
+SCRIPT = os.path.dirname(__file__)
+dataDir = os.path.join(SCRIPT, "..", "data")
+file_name_test=dataDir + '\\testTrack_hierarchy.txt'
+file_name_train=dataDir + '\\trainIdx2_matrix.txt'
+output_file= dataDir + '\\output1.txt'
 
 fTest= open(file_name_test, 'r')
 fTrain=open(file_name_train, 'r')
@@ -37,8 +39,8 @@ for line in fTest:
 	lastUserID=userID
 
 	if ii==6 : 
-		while (Trainline):
-		# for Trainline in fTrain:
+		# while (Trainline):
+		for Trainline in fTrain:
 			arr_train = Trainline.strip().split('|')
 			trainUserID=arr_train[0]
 			trainItemID=arr_train[1]
