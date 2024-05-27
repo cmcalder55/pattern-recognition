@@ -2,3 +2,4 @@ todo.txt
 __pycache__
 .vscode
 music-recommender/data
+predicxt-global-sales/decision_tree
