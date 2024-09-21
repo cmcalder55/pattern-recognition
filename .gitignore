@@ -1,5 +1,5 @@
-todo.txt
 __pycache__
+TODO.*
 .vscode
 music-recommender/data
 predicxt-global-sales/decision_tree
