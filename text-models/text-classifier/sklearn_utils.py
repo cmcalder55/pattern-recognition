@@ -31,7 +31,7 @@ CLASSIFIER_MAP = {
         }
     }
 
-# region CLASSIFIERS
+# region: CLASSIFIERS
 
 def show_plots(curve_data, model_name, lw=2):
     
@@ -64,6 +64,7 @@ def show_plots(curve_data, model_name, lw=2):
     plt.tight_layout()
     plt.show()
 
+
 def predictions(model_type, model, x_test):
     
     test_predictions = pred_probability = []
@@ -82,17 +83,18 @@ def predictions(model_type, model, x_test):
         
     return test_predictions, pred_probability
 
+
 def vectorize_data(x_test, x_train, stop_words, min_df):
     # initialize and fit the TfidfVectorizer
     vec = TfidfVectorizer(stop_words=stop_words, min_df=min_df)
     vec.fit(x_test)
     # vectorize data
     return vec.transform(x_test), vec.transform(x_train)
-    
+
+
 def fit_model(x_train, y_train,
-                model_type: Union[Literal["nb"], Literal["svc"]], 
-                algorithm_para=1.0
-                ):
+              model_type: Union[Literal["nb"], Literal["svc"]], 
+              algorithm_para=1.0):
     
     # choose classification model and add hyperparams
     model_params = CLASSIFIER_MAP[model_type]
@@ -103,12 +105,13 @@ def fit_model(x_train, y_train,
     
     return model, model_params["name"]
 
+
 def predict_and_evaluate(model_type, model, x_test, y_test):
     
     curve_data = {
-                "auc": {"labels": ("False Positive Rate", "True Positive Rate")}, 
-                "prc" :{"labels": ("Recall", "Precision")}
-            } 
+        "auc": {"labels": ("False Positive Rate", "True Positive Rate")}, 
+        "prc" :{"labels": ("Recall", "Precision")}
+    } 
     
     # predict test set output and get probability of guessing each class
     test_predictions, pred_probability = predictions(model_type, model, x_test)
@@ -134,6 +137,7 @@ def predict_and_evaluate(model_type, model, x_test, y_test):
 
     return curve_data
 
+
 def classify_data(x_train, y_train, x_test, y_test, model_type, algorithm_para=1.0, min_df=1, stop_words=None):
     
     x_test, x_train = vectorize_data(x_test, x_train, stop_words, min_df)
@@ -144,6 +148,7 @@ def classify_data(x_train, y_train, x_test, y_test, model_type, algorithm_para=1
     show_plots(curve_data, model_name)
     
     return curve_data
+
 
 def search_params(x_train, y_train, clf, vectorizer=TfidfVectorizer()):
     
@@ -179,6 +184,7 @@ def search_params(x_train, y_train, clf, vectorizer=TfidfVectorizer()):
         )
     return min_df, stop_words, C
 
+
 def sample_size_impact(docs, y, model_type):
 
     train_size = list(range(1,10))
@@ -208,4 +214,4 @@ def sample_size_impact(docs, y, model_type):
 
     plt.show()
 
-# endregion
+# endregion: CLASSIFIERS
