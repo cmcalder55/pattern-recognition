@@ -1,9 +1,12 @@
 # Pattern Recognition
 
-## [Decision Tree](./decision_tree)
+## [GMM/Probability Density](./gmm)
 
-## [Music Recommendation Model](./music-recommender)
+## [Predict Video Game Sales](./predict-game-sales)
 
-## [Text Clustering](./text-clustering)
+## [Music Recommender](./music-recommender)
 
-## [Text Classifier](./text-classifier)
+## [Text Models](./text-models)
+
+- [Text Clustering](./text-models/text-clustering)
+- [Text Classifier](./text-models/text-classifier)
